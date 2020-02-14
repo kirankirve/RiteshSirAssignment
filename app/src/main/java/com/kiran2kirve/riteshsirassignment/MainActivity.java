@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar = findViewById(R.id.progress_bar);
         mMainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         mMainActivityViewModel.init(getApplicationContext());
+
+        showProgressBar();
         initRecyclerView();
 
         mMainActivityViewModel.getUserResultList().observe(this, new Observer<List<Result>>() {
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 // mAdapter.renderList(resultList);
                 mAdapter.renderList(mMainActivityViewModel.getUserResultList().getValue());
                 mAdapter.notifyDataSetChanged();
+
+                hideProgressBar();
             }
         });
 
